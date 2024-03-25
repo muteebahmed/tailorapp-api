@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\TailorController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TailorCustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +32,19 @@ Route::group(['prefix' => '/shops' ], function ($router) {
     $router->post('/update',[ShopController::class , 'update'] );
 });
 
+Route::group(['prefix' => '/customers' ], function ($router) {
+    $router->get('/index', [CustomerController::class,'index']);
+    $router->post('/store', [CustomerController::class,'store']);
+    $router->post('/update', [CustomerController::class,'update']);
+    $router->post('/destroy', [CustomerController::class,'destroy']);
+});
+
+Route::group(['prefix' => '/tailorcustomers' ], function ($router) {
+    $router->get('/index', [TailorCustomerController::class,'index']);
+    $router->post('/store', [TailorCustomerController::class,'store']);
+    $router->post('/update', [TailorCustomerController::class,'update']);
+    $router->post('/destroy', [TailorCustomerController::class,'destroy']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
